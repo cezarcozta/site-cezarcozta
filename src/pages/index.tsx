@@ -1,5 +1,7 @@
 import { useState } from "react";
 import {
+  FaGithubSquare,
+  FaLinkedin,
   FaLocationArrow,
   FaMapMarkerAlt,
   FaRegFileCode,
@@ -57,7 +59,10 @@ export default function Home() {
         </nav>
 
         <section>
-          <div hidden={isVisible[0]}>USER</div>
+          <div hidden={isVisible[0]}>
+            <FaLinkedin size={32} />
+            <FaGithubSquare size={32} />
+          </div>
           <div hidden={isVisible[1]}>CODE SKILLS</div>
           <div hidden={isVisible[2]}>SOFT SKILLS</div>
           <div hidden={isVisible[3]}>LOCATION</div>
