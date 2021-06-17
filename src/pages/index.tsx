@@ -8,70 +8,17 @@ import {
 } from "react-icons/fa";
 import styles from "./index-styles.module.scss";
 
-type Visible = {
-  user: boolean;
-  location: boolean;
-  target: boolean;
-  softSkills: boolean;
-  hardSkills: boolean;
-};
-
 export default function Home() {
-  const [visible, setVisible] = useState<Visible>({
-    user: false,
-    location: true,
-    target: true,
-    hardSkills: true,
-    softSkills: true,
-  });
+  const [isVisible, setIsVisible] = useState([false, true, true, true, true]);
 
-  const handleClickLocation = () => {
-    setVisible({
-      user: true,
-      location: false,
-      target: true,
-      hardSkills: true,
-      softSkills: true,
-    });
+  const handleNav = (id: number) => {
+    setIsVisible(
+      isVisible.map((item, index) =>
+        item ? (index === id ? (item = false) : item) : (item = true)
+      )
+    );
   };
 
-  const handleClickTarget = () => {
-    setVisible({
-      user: true,
-      location: true,
-      target: false,
-      hardSkills: true,
-      softSkills: true,
-    });
-  };
-
-  const handleClickUer = () => {
-    setVisible({
-      user: false,
-      location: true,
-      target: true,
-      hardSkills: true,
-      softSkills: true,
-    });
-  };
-  const handleClickSoftSkills = () => {
-    setVisible({
-      user: true,
-      location: true,
-      target: true,
-      hardSkills: true,
-      softSkills: false,
-    });
-  };
-  const handleClickHardSkills = () => {
-    setVisible({
-      user: true,
-      location: true,
-      target: true,
-      hardSkills: false,
-      softSkills: true,
-    });
-  };
   return (
     <div className={styles.container}>
       <header>
@@ -82,27 +29,27 @@ export default function Home() {
         <nav>
           <ul>
             <li>
-              <button onClick={handleClickUer}>
+              <button onClick={() => handleNav(0)}>
                 <FaUserTie strokeWidth={3} size={32} />
               </button>
             </li>
             <li>
-              <button onClick={handleClickHardSkills}>
+              <button onClick={() => handleNav(1)}>
                 <FaRegFileCode strokeWidth={3} size={32} />
               </button>
             </li>
             <li>
-              <button onClick={handleClickSoftSkills}>
+              <button onClick={() => handleNav(2)}>
                 <FaUsersCog strokeWidth={3} size={32} />
               </button>
             </li>
             <li>
-              <button onClick={handleClickLocation}>
+              <button onClick={() => handleNav(3)}>
                 <FaMapMarkerAlt strokeWidth={3} size={32} />
               </button>
             </li>
             <li>
-              <button onClick={handleClickTarget}>
+              <button onClick={() => handleNav(4)}>
                 <FaLocationArrow strokeWidth={3} size={32} />
               </button>
             </li>
@@ -110,11 +57,11 @@ export default function Home() {
         </nav>
 
         <section>
-          <div hidden={visible.user}>USER</div>
-          <div hidden={visible.hardSkills}>CODE SKILLS</div>
-          <div hidden={visible.softSkills}>SOFT SKILLS</div>
-          <div hidden={visible.location}>LOCATION</div>
-          <div hidden={visible.target}>TARGET</div>
+          <div hidden={isVisible[0]}>USER</div>
+          <div hidden={isVisible[1]}>CODE SKILLS</div>
+          <div hidden={isVisible[2]}>SOFT SKILLS</div>
+          <div hidden={isVisible[3]}>LOCATION</div>
+          <div hidden={isVisible[4]}>TARGET</div>
         </section>
       </main>
 
